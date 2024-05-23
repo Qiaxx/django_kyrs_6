@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "mailing-kyrs-6"
+version = "0.1.0"
+description = "Проект по курсовой номер 6 при работе на джанго по созданию сервиса рассылок"
+authors = ["Qiaxx"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+django = "^5.0.6"
+black = "^24.4.2"
+pillow = "^10.3.0"
+ipython = "^8.24.0"
+psycopg2-binary = "^2.9.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
