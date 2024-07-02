@@ -1,0 +1,25 @@
+{% extends 'mailing/base.html'%}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+        {% for blog in object_list %}
+            {% if blog.published%}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <img src="{{ blog.preview | media_filter }}">
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ blog.title }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{ blog.content | truncatechars:100 }}</li>
+                    </ul>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post_detail' blog.pk %}" role="button">Подробнее</a>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post_update' blog.pk %}" role="button">Редактировать</a>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post_delete' blog.pk %}" role="button">Удалить</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+        {% endfor %}
+    <a class="p-2 btn btn-outline-primary" href="{% url 'blog:post_create'%}">Создать новый пост</a>
+    </div>
+{% endblock %}

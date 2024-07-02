@@ -1,0 +1,33 @@
+{% extends 'mailing/base.html'%}
+{% block content %}
+<div class="container">
+    <form class="row" method="post" enctype="multipart/form-data">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+{#                    <div class="mt-3">#}
+{#                        <a href="{% url 'users:reset_password' %}" class="forgot-password-link">Забыли пароль?</a>#}
+{#                    </div>#}
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Войти
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+.forgot-password-link {
+    text-decoration: none;
+    color: black;
+}
+
+.forgot-password-link:hover {
+    color: blue;
+}
+</style>
+
+{% endblock %}

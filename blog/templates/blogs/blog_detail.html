@@ -1,0 +1,18 @@
+{% extends 'mailing/base.html'%}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <img src="{{ object.preview | media_filter }}" alt="">
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ object.title }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{ object.content }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <p>Просмотры: {{ object.views_count }}</p>
+    </div>
+{% endblock %}

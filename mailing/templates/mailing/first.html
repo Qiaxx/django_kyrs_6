@@ -1,0 +1,17 @@
+{% extends "mailing/base.html" %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    <h1>Главная страница</h1>
+    <p>Количество рассылок всего: {{ total_mailings }}</p>
+    <p>Количество активных рассылок: {{ active_mailings }}</p>
+    <p>Количество уникальных клиентов для рассылок: {{ unique_clients }}</p>
+
+    <h2>Случайные статьи из блога</h2>
+    <ul>
+        {% for post in random_blog_posts %}
+            <li>{{ post.title }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

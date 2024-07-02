@@ -1,0 +1,17 @@
+{% extends "client/base.html" %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ object.full_name }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{ object.email }}</li>
+                        <li>{{ object.comment }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

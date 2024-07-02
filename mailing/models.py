@@ -1,6 +1,7 @@
 from django.db import models
 
 from client.models import Client
+from users.models import User
 
 
 class Message(models.Model):
@@ -9,6 +10,14 @@ class Message(models.Model):
     )
     body = models.TextField(
         verbose_name="Текст сообщения", help_text="Введите текст сообщения"
+    )
+    user = models.ForeignKey(
+        User,
+        verbose_name="Пользователь",
+        help_text="Укажите владельца товара",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):
@@ -40,8 +49,17 @@ class Mailing(models.Model):
         verbose_name="Статус рассылки",
         help_text="Выберите статус рассылки",
     )
+    is_active = models.BooleanField(default=True)
     message = models.OneToOneField(Message, on_delete=models.CASCADE)
     clients = models.ManyToManyField(Client)
+    user = models.ForeignKey(
+        User,
+        verbose_name="Пользователь",
+        help_text="Укажите владельца товара",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
 
     def __str__(self):
         return f"Рассылка {self.id} - {self.status}"
@@ -49,6 +67,9 @@ class Mailing(models.Model):
     class Meta:
         verbose_name = "Рассылка"
         verbose_name_plural = "Рассылки"
+        permissions = [
+            ("deactivate_mailing", "Can deactivate mailing"),
+        ]
 
 
 class Attempt(models.Model):

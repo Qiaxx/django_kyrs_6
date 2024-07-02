@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Client(models.Model):
     full_name = models.CharField(
@@ -13,6 +15,14 @@ class Client(models.Model):
         null=True,
         verbose_name="Комментарий клиента",
         help_text="Введите комментарий клиента",
+    )
+    user = models.ForeignKey(
+        User,
+        verbose_name="Пользователь",
+        help_text="Укажите владельца товара",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):
