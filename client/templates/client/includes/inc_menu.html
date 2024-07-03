@@ -8,6 +8,7 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Регистрация</a>
         {% else %}
         <a class="p-2 btn btn-outline-primary" href="{% url  'users:logout' %}">Выход</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url  'users:user_profile' %}">Профиль</a>
         {% endif %}
     </nav>
 </div>

@@ -1,0 +1,11 @@
+{% extends "mailing/base.html" %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    <h1>Профиль {{ user_profile.username }}</h1>
+    <p>Email: {{ user_profile.email }}</p>
+    <p>Имя: {{ user_profile.first_name }}</p>
+    <p>Фамилия: {{ user_profile.last_name }}</p>
+    <a href="{% url 'users:user_profile_edit' user_profile.pk %}">Редактировать профиль</a>
+</div>
+{% endblock %}

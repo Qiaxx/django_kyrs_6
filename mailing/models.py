@@ -28,6 +28,7 @@ class Message(models.Model):
         verbose_name_plural = "Сообщения"
 
 
+
 class Mailing(models.Model):
     STATUS_CHOICES = [
         ("created", "Created"),

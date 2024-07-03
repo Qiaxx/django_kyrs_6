@@ -13,6 +13,7 @@ from mailing.models import Message
 
 from blog.models import Blog
 from mailing.models import Mailing
+from mailing.services import get_cached_messages
 from users.models import User
 
 
@@ -34,6 +35,16 @@ def base(request):
 
 class MessageListView(ListView):
     model = Message
+    context_object_name = "messages"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["messages"] = Message.objects.all()
+
+        return context
+
+    def get_queryset(self):
+        return get_cached_messages()
 
 
 class MessageDetailsView(DetailView):

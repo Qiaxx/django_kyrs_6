@@ -10,7 +10,9 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>{{ client.email }}</li>
                     </ul>
+                    {% if client.user == request.user %}
                     <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'client:client_detail' client.pk %}" role="button">Подробнее</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

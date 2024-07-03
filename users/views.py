@@ -1,11 +1,12 @@
 import secrets
 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, UpdateView
 
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, CustomUserChangeForm
 from users.models import User
 
 from config.settings import EMAIL_HOST_USER
@@ -38,3 +39,19 @@ def email_verification(request, token):
     user.is_active = True
     user.save()
     return redirect(reverse("users:login"))
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'users/user_profile.html'
+    context_object_name = 'user_profile'
+
+
+class UserProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = User
+    form_class = CustomUserChangeForm
+    template_name = 'users/user_profile_edit.html'
+    success_url = reverse_lazy('users:user_profile')
+
+    def test_func(self):
+        return self.get_object() == self.request.user or self.request.user.is_superuser

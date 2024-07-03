@@ -5,6 +5,8 @@ from django.db import models
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name="почта")
+    first_name = models.CharField(max_length=15, verbose_name="Имя")
+    last_name = models.CharField(max_length=30, verbose_name="Фамилия")
     is_blocked = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
