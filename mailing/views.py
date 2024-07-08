@@ -43,12 +43,19 @@ class MessageListView(ListView):
 
         return context
 
-    def get_queryset(self):
-        return get_cached_messages()
+    def get_queryset(self,):
+        queryset = super().get_queryset()
+        queryset = get_cached_messages()
+
+        return queryset.filter(user=self.request.user)
 
 
 class MessageDetailsView(DetailView):
     model = Message
+
+    def test_func(self):
+        mailing = self.get_object()
+        return mailing.created_by == self.request.user
 
 
 class MessageCreateView(CreateView):
@@ -70,6 +77,10 @@ class MessageUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse("mailing:message_detail", kwargs={"pk": self.object.pk})
+
+    def test_func(self):
+        mailing = self.get_object()
+        return mailing.created_by == self.request.user
 
 
 class MessageDeleteView(DeleteView):

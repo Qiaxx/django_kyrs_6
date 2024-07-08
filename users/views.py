@@ -46,12 +46,18 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     template_name = 'users/user_profile.html'
     context_object_name = 'user_profile'
 
+    def get_object(self, **kwargs):
+        return self.request.user
+
 
 class UserProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = User
     form_class = CustomUserChangeForm
     template_name = 'users/user_profile_edit.html'
     success_url = reverse_lazy('users:user_profile')
+
+    def get_object(self, **kwargs):
+        return self.request.user
 
     def test_func(self):
         return self.get_object() == self.request.user or self.request.user.is_superuser
